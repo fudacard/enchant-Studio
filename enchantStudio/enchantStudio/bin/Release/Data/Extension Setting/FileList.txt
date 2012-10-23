@@ -1,0 +1,1 @@
+HTMLファイル(*.html;*.htm)|*.html;*.htm|javascript ファイル(*.js)|*.js|テキストファイル(*.txt)|*.txt|すべてのファイル(*.*)|*.*
