@@ -96,19 +96,21 @@
             // 
             this.button1.Location = new System.Drawing.Point(368, 24);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 19);
+            this.button1.Size = new System.Drawing.Size(104, 30);
             this.button1.TabIndex = 6;
             this.button1.Text = "次を置き換え";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(368, 49);
+            this.button2.Location = new System.Drawing.Point(368, 60);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 19);
+            this.button2.Size = new System.Drawing.Size(104, 34);
             this.button2.TabIndex = 7;
             this.button2.Text = "すべて置き換え";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -140,7 +142,7 @@
             this.MinimizeBox = false;
             this.Name = "Form_Replace";
             this.ShowInTaskbar = false;
-            this.Text = "置き換え(未実装)";
+            this.Text = "置き換え";
             this.ResumeLayout(false);
             this.PerformLayout();
 

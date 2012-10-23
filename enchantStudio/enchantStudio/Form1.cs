@@ -701,7 +701,8 @@ namespace enchantStudio
 
         private void 置き換えToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReplaceWindow.ShowDialog();
+            if (tabControl1.TabCount < 1) return;
+            ReplaceWindow.ShowDialog((AzukiControl)tabControl1.SelectedTab.Controls[0]);
         }
 
 

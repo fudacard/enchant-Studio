@@ -181,7 +181,7 @@ namespace enchantStudio.Properties {
         }
         
         /// <summary>
-        ///   Ver 0.9.4 RC に類似しているローカライズされた文字列を検索します。
+        ///   Ver 1.0.0 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ES_Version {
             get {

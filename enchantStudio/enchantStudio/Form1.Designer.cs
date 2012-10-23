@@ -371,8 +371,8 @@
             // 
             this.置き換えToolStripMenuItem.Name = "置き換えToolStripMenuItem";
             this.置き換えToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.置き換えToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.置き換えToolStripMenuItem.Text = "置き換え(未実装)";
+            this.置き換えToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.置き換えToolStripMenuItem.Text = "置き換え";
             this.置き換えToolStripMenuItem.Click += new System.EventHandler(this.置き換えToolStripMenuItem_Click);
             // 
             // 表示ToolStripMenuItem
@@ -387,7 +387,7 @@
             // コードToolStripMenuItem
             // 
             this.コードToolStripMenuItem.Name = "コードToolStripMenuItem";
-            this.コードToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.コードToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.コードToolStripMenuItem.Text = "コード";
             // 
             // プロジェクトToolStripMenuItem
