@@ -181,15 +181,6 @@ namespace enchantStudio.Properties {
         }
         
         /// <summary>
-        ///   Ver 1.0.0 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ES_Version {
-            get {
-                return ResourceManager.GetString("ES_Version", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap folder_horizontal_open {

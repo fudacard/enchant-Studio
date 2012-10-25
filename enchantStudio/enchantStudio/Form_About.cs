@@ -19,7 +19,6 @@ namespace enchantStudio
 
         private void About_Load(object sender, EventArgs e)
         {
-            label4.Text = enchantStudio.Properties.Resources.ES_Version;
             textBox1.Text = File.ReadAllText("Data/crdata.txt", Encoding.GetEncoding(932));
         }
 
