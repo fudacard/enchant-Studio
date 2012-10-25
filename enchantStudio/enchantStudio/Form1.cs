@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+ * enchant Studio
+ * v1.0.1
+ * ｋｂ１０うｙ
+ * 
+ * v1.0.0からの更新点
+ * ・フォルダツリーのパスのテキストで、
+ * 　フォルダが存在するかチェックするようにした
+ * 
+ * ・プロジェクト作成時の例外を一応対処した
+ * 
+ * ・タブでファイルを編集している時、
+ * 　本気でUntitledを無視する仕様にした
+ * 
+ * ・開始時に、exeのディレクトリを開かないようにした
+ * 
+ */
+
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -15,7 +33,6 @@ namespace enchantStudio
 {
     public partial class Form1 : Form
     {
-
 
         ESConfig config;
         ESProject nowProject;
@@ -53,10 +70,14 @@ namespace enchantStudio
         Dictionary<string, Color> BackColors = new Dictionary<string, Color>();
 
         /// <summary>
-        /// 格納したNodeがディレクトリ8日を格納し。
+        /// 格納したNodeがディレクトリ用のものかをチェックします。
+        /// キーにはNodeのHashを入れてください。
         /// </summary>
         Dictionary<int, bool> IsDirectory = new Dictionary<int, bool>();
 
+        /// <summary>
+        /// IsDirectoryのスニペット版です。
+        /// </summary>
         Dictionary<int, bool> S_IsDirectory = new Dictionary<int, bool>();
 
         //Form
@@ -68,6 +89,7 @@ namespace enchantStudio
         Form_About AboutWindow;
         Form_SetProject PrjSettingWindow;
         Form_Replace ReplaceWindow;
+        
         Encoding SelectEncoding;
         Font EditorFont;
 
@@ -103,11 +125,12 @@ namespace enchantStudio
             PrjSettingWindow = new Form_SetProject();
             ReplaceWindow = new Form_Replace();
 
-            viewpath = Path.GetDirectoryName(Application.ExecutablePath);
-            nowfp = viewpath;
-            ViewFolderTree(viewpath, treeView1);
+            //開始時に開かない
+            //viewpath = Path.GetDirectoryName(Application.ExecutablePath);
+            //nowfp = viewpath;
+            //ViewFolderTree(viewpath, treeView1);
+            //toolStripTextBox2.Text = viewpath;
             SetSnippetsTree();
-            toolStripTextBox2.Text = viewpath;
             setKeywordColor();
             seri = new Serializer();
 
@@ -359,7 +382,7 @@ namespace enchantStudio
                 ViewFolderTree(nowProject.ProjectPath + "\\" + nowProject.ProjectName, treeView1);
                 this.Text = nowProject.ProjectName + " - enchant Studio";
 
-                ESProjectXML exm = (ESProjectXML)seri.LoadObject(typeof(ESProjectXML),nowfp+nowProject.ProjectName+".esprj");
+                ESProjectXML exm = (ESProjectXML)seri.LoadObject(typeof(ESProjectXML),nowfp+"\\"+nowProject.ProjectName+".esprj");
                 nowProject.Execute = exm.ExecuteHTML;
 
             }
@@ -515,8 +538,15 @@ namespace enchantStudio
 
         private void toolStripButton13_Click(object sender, EventArgs e)
         {
-            viewpath = toolStripTextBox2.Text;
-            ViewFolderTree(viewpath, treeView1);
+            if (Directory.Exists(toolStripTextBox2.Text))
+            {
+                ViewFolderTree(viewpath, treeView1);
+                viewpath = toolStripTextBox2.Text;
+            }
+            else
+            {
+                MessageBox.Show("指定されたフォルダは存在しません。", "警告");
+            }
         }
 
         private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
@@ -669,11 +699,12 @@ namespace enchantStudio
                 );
         }
 
+        //ファイルの未保存チェックのみ
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             for (int i = 0; i < tabControl1.TabCount; i++)
             {
-                if (((AzukiControl)tabControl1.TabPages[i].Controls[0]).Document.IsDirty)
+                if (((AzukiControl)tabControl1.TabPages[i].Controls[0]).Document.IsDirty && FullFileName.ContainsKey(tabControl1.SelectedTab.GetHashCode()))
                 {
                     switch (MessageBox.Show(
                         "保存されていないファイルがあります。保存しますか？\n(Untitledは無視されます)",
