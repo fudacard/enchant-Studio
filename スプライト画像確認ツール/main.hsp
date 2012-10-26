@@ -1,0 +1,109 @@
+#include "main.as"
+
+*start
+	//title "スプライト画像確認ツール"
+	cmd=dir_cmdline
+	optarg=""
+	file=""
+	spx=32
+	spy=32
+	
+*analyze
+	file=cmd
+	file=strtrim(file,0,'"')
+	//split cmd," ",arg
+	//repeat length(arg)
+	//	if strmid(arg(cnt),0,1)=="-" {
+	//		optarg=arg(cnt)
+	//		gosub *optal
+	//	} else {
+	//		file=arg(cnt)
+	//	}
+	//loop
+	
+	if file=="" : dialog "ファイル名が入力されていません" : end
+	
+	exist file
+	if (strsize==-1) : dialog "指定されたファイルがありません:\n"+file : end
+	
+*load
+	buffer 2
+	picload file
+	px=ginfo_winx
+	py=ginfo_winy
+	
+	gsel 0
+	screen 0,px,py
+	
+	title "enchant Studio スプライト画像確認ツール 現在のサイズ:"+strf("%d*%d",spx,spy)
+	
+*main
+	repeat
+		redraw 2
+			//背景
+			color : boxf
+			//色加算
+			gmode 5,,,128
+			pos 0,0
+			gcopy 2,0,0,px,py
+			//分割線
+			color 255
+			repeat px/spx+1
+				line cnt*spx,-1,cnt*spx,py+1
+			loop
+
+			repeat py/spy+1
+				line -1,cnt*spy,px+1,cnt*spy
+			loop
+	
+			stick key
+			if (key&1) {
+				spx=limit(spx/2,4,1024)
+				title "enchant Studio スプライト画像確認ツール 現在のサイズ:"+strf("%d*%d",spx,spy)
+			}
+			if (key&4) {
+				spx=limit(spx*2,4,1024)
+				title "enchant Studio スプライト画像確認ツール 現在のサイズ:"+strf("%d*%d",spx,spy)
+			}
+			if (key&2) {
+				spy=limit(spy/2,4,1024)
+				title "enchant Studio スプライト画像確認ツール 現在のサイズ:"+strf("%d*%d",spx,spy)
+			}
+			if (key&8) {
+				spy=limit(spy*2,4,1024)
+				title "enchant Studio スプライト画像確認ツール 現在のサイズ:"+strf("%d*%d",spx,spy)
+			}
+			//スプライトNo.情報
+			ptx=mousex/spx
+			pty=mousey/spy
+			logmes strf("%d,%d",ptx*spx,px)
+			if ((ptx+1)*spx>px)||((pty+1)*spy>py) {
+				ss="スプライト範囲外"
+			} else {
+				xm=px/spx
+				ss=strf("スプライトNo.%d",pty*xm+ptx)
+			}
+			color ,255
+			pos mousex,mousey
+			title ss+" 現在のサイズ:"+strf("%d*%d",spx,spy)
+			mes ss
+			
+		redraw 1
+		await 33
+	loop
+	
+	
+////////////////////////////////////////////////////////////////	
+*optal
+	switch peek(optarg,1)
+		case 'x':
+			spx=int(strmid(optarg,2,16))
+			swbreak
+		case 'y':
+			spy=int(strmid(optarg,2,16))
+			swbreak
+		default:
+			dialog "unknown argument:"+optarg
+			swbreak
+	swend
+	return
