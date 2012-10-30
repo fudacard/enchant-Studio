@@ -116,6 +116,17 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.開くToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.名前の変更ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.開く閉じるToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip5 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.開くToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.名前の変更ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.スプライト画像チェックツールToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -140,6 +151,9 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
+            this.contextMenuStrip4.SuspendLayout();
+            this.contextMenuStrip5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -387,7 +401,7 @@
             // コードToolStripMenuItem
             // 
             this.コードToolStripMenuItem.Name = "コードToolStripMenuItem";
-            this.コードToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.コードToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.コードToolStripMenuItem.Text = "コード";
             // 
             // プロジェクトToolStripMenuItem
@@ -597,6 +611,7 @@
             this.treeView1.TabIndex = 0;
             this.treeView1.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeCollapse);
             this.treeView1.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeExpand);
+            this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // imageList1
@@ -961,6 +976,88 @@
             this.openFileDialog2.FileName = "openFileDialog2";
             this.openFileDialog2.Filter = "enchant Studio Project (*.esprj)|*.esprj";
             // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.開くToolStripMenuItem1,
+            this.名前の変更ToolStripMenuItem,
+            this.削除ToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(137, 70);
+            // 
+            // 開くToolStripMenuItem1
+            // 
+            this.開くToolStripMenuItem1.Name = "開くToolStripMenuItem1";
+            this.開くToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.開くToolStripMenuItem1.Text = "開く";
+            this.開くToolStripMenuItem1.Click += new System.EventHandler(this.開くToolStripMenuItem1_Click);
+            // 
+            // 名前の変更ToolStripMenuItem
+            // 
+            this.名前の変更ToolStripMenuItem.Name = "名前の変更ToolStripMenuItem";
+            this.名前の変更ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.名前の変更ToolStripMenuItem.Text = "名前の変更";
+            this.名前の変更ToolStripMenuItem.Click += new System.EventHandler(this.名前の変更ToolStripMenuItem_Click);
+            // 
+            // 削除ToolStripMenuItem
+            // 
+            this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
+            this.削除ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.削除ToolStripMenuItem.Text = "削除";
+            this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip4
+            // 
+            this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.開く閉じるToolStripMenuItem});
+            this.contextMenuStrip4.Name = "contextMenuStrip4";
+            this.contextMenuStrip4.Size = new System.Drawing.Size(142, 26);
+            // 
+            // 開く閉じるToolStripMenuItem
+            // 
+            this.開く閉じるToolStripMenuItem.Name = "開く閉じるToolStripMenuItem";
+            this.開く閉じるToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.開く閉じるToolStripMenuItem.Text = "開く/閉じる";
+            this.開く閉じるToolStripMenuItem.Click += new System.EventHandler(this.開く閉じるToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip5
+            // 
+            this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.開くToolStripMenuItem2,
+            this.名前の変更ToolStripMenuItem1,
+            this.削除ToolStripMenuItem1,
+            this.スプライト画像チェックツールToolStripMenuItem});
+            this.contextMenuStrip5.Name = "contextMenuStrip5";
+            this.contextMenuStrip5.Size = new System.Drawing.Size(245, 114);
+            // 
+            // 開くToolStripMenuItem2
+            // 
+            this.開くToolStripMenuItem2.Name = "開くToolStripMenuItem2";
+            this.開くToolStripMenuItem2.Size = new System.Drawing.Size(244, 22);
+            this.開くToolStripMenuItem2.Text = "開く";
+            this.開くToolStripMenuItem2.Click += new System.EventHandler(this.開くToolStripMenuItem2_Click);
+            // 
+            // 名前の変更ToolStripMenuItem1
+            // 
+            this.名前の変更ToolStripMenuItem1.Name = "名前の変更ToolStripMenuItem1";
+            this.名前の変更ToolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
+            this.名前の変更ToolStripMenuItem1.Text = "名前の変更";
+            this.名前の変更ToolStripMenuItem1.Click += new System.EventHandler(this.名前の変更ToolStripMenuItem1_Click);
+            // 
+            // 削除ToolStripMenuItem1
+            // 
+            this.削除ToolStripMenuItem1.Name = "削除ToolStripMenuItem1";
+            this.削除ToolStripMenuItem1.Size = new System.Drawing.Size(244, 22);
+            this.削除ToolStripMenuItem1.Text = "削除";
+            this.削除ToolStripMenuItem1.Click += new System.EventHandler(this.削除ToolStripMenuItem1_Click);
+            // 
+            // スプライト画像チェックツールToolStripMenuItem
+            // 
+            this.スプライト画像チェックツールToolStripMenuItem.Name = "スプライト画像チェックツールToolStripMenuItem";
+            this.スプライト画像チェックツールToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.スプライト画像チェックツールToolStripMenuItem.Text = "スプライト画像チェックツール";
+            this.スプライト画像チェックツールToolStripMenuItem.Click += new System.EventHandler(this.スプライト画像チェックツールToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1007,6 +1104,9 @@
             this.splitContainer2.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.contextMenuStrip3.ResumeLayout(false);
+            this.contextMenuStrip4.ResumeLayout(false);
+            this.contextMenuStrip5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1100,6 +1200,17 @@
         private System.Windows.Forms.ToolStripSplitButton toolStripButton6;
         private System.Windows.Forms.ToolStripMenuItem プロジェクトToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem 開くToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 名前の変更ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 削除ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip4;
+        private System.Windows.Forms.ToolStripMenuItem 開く閉じるToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip5;
+        private System.Windows.Forms.ToolStripMenuItem 開くToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 名前の変更ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 削除ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem スプライト画像チェックツールToolStripMenuItem;
     }
 }
 

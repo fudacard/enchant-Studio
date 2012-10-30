@@ -1,10 +1,13 @@
 ﻿/*
  * enchant Studio
- * v1.0.2
+ * v1.1.1
  * ｋｂ１０うｙ
  * 
- * v1.0.1からの更新点
- * ・Aboutで、バージョンを表示しないようにした。
+ * v1.0.2からの更新点
+ * ・フォルダツリーの右クリックメニューを追加した。
+ * 
+ * ・それにともなって、画像を右クリした時に、
+ * 　チェックツールでチェックするようにした。
  * 
  */
 
@@ -84,6 +87,11 @@ namespace enchantStudio
         
         Encoding SelectEncoding;
         Font EditorFont;
+        
+        /// <summary>
+        /// 右クリしたノード
+        /// </summary>
+        TreeNode rcnode;
 
         string viewpath = "C:\\";
         string nowfp = "";
@@ -534,6 +542,7 @@ namespace enchantStudio
             {
                 ViewFolderTree(viewpath, treeView1);
                 viewpath = toolStripTextBox2.Text;
+
             }
             else
             {
@@ -726,6 +735,87 @@ namespace enchantStudio
         {
             if (tabControl1.TabCount < 1) return;
             ReplaceWindow.ShowDialog((AzukiControl)tabControl1.SelectedTab.Controls[0]);
+        }
+
+        private void 開くToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (rcnode.Nodes.Count != 0) return;
+            if (IsDirectory[rcnode.GetHashCode()]) return;
+            switch (Path.GetExtension(rcnode.FullPath).ToLower())
+            {
+                case ".txt":
+                case ".js":
+                case ".htm":
+                case ".html":
+                    CreateAzukiTabWithFile(viewpath + "\\" + rcnode.FullPath);
+                    break;
+                default:
+                    System.Diagnostics.Process.Start(viewpath + "\\" + rcnode.FullPath);
+                    break;
+            }
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button != MouseButtons.Right) return;
+            if (e.Node.Nodes.Count != 0)
+            {
+                //Console.WriteLine("Node RightClicked");
+                treeView1.SelectedNode = e.Node;
+                rcnode = e.Node;
+                contextMenuStrip4.Show(treeView1, e.Location);
+            }
+            else
+            {
+                //ファイルだった時
+                ShowBestContextMenu(Path.GetExtension(e.Node.FullPath),e);
+            }
+        }
+
+        private void 開く閉じるToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rcnode.IsExpanded)
+            {
+                rcnode.Collapse();
+            }
+            else
+            {
+                rcnode.Expand();
+            }
+        }
+
+        private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("削除してよろしいですか？", "削除", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                File.Delete(viewpath + "\\" + rcnode.FullPath);
+                ViewFolderTree(viewpath, treeView1);
+            }
+        }
+
+        private void 名前の変更ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 開くToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            開くToolStripMenuItem1_Click(sender, e);
+        }
+
+        private void 名前の変更ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            名前の変更ToolStripMenuItem_Click(sender, e);
+        }
+
+        private void 削除ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            削除ToolStripMenuItem_Click(sender, e);
+        }
+
+        private void スプライト画像チェックツールToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("Data\\isview.exe", viewpath + rcnode.FullPath);
         }
 
 

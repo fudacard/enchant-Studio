@@ -12,7 +12,8 @@ using System.Text;
 /*
  *こっちのファイルは
  *イベントハンドラ以外のものを記述
- * 
+ * 名前こそAzukiだが
+ * そんなのカンケイネェ
  */
 
 namespace enchantStudio
@@ -295,6 +296,12 @@ namespace enchantStudio
             }
         }
 
+        /// <summary>
+        /// フォルダツリーを構築します。
+        /// 
+        /// </summary>
+        /// <param name="path">構築するツリーのパス</param>
+        /// <param name="treev">魅せるツリービュー</param>
         public void ViewFolderTree(string path, TreeView treev)
         {
             treev.Nodes.Clear();
@@ -319,6 +326,12 @@ namespace enchantStudio
 
         }
 
+        /// <summary>
+        /// 拡張子から、ファイルタイプにあったアイコン番号を
+        /// 取得します。
+        /// </summary>
+        /// <param name="ext">.つき拡張子</param>
+        /// <returns>アイコン番号</returns>
         public int GetFileIconIndex(string ext)
         {
             switch (Path.GetExtension(ext).ToLower())
@@ -379,6 +392,27 @@ namespace enchantStudio
 
             }
         }
-        
+
+        /// <summary>
+        /// 拡張子に見合った最適なコンテキスト(ryを
+        /// 表示します。
+        /// </summary>
+        /// <param name="ext"></param>
+        void ShowBestContextMenu(string ext,TreeNodeMouseClickEventArgs e)
+        {
+            treeView1.SelectedNode = e.Node;
+            switch (GetFileIconIndex(ext))
+            {
+                case 2:
+                    rcnode = e.Node;
+                    contextMenuStrip5.Show(treeView1, e.Location);
+                    break;
+                default:
+                    rcnode = e.Node;
+                    contextMenuStrip3.Show(treeView1, e.Location);
+                    break;
+
+            }
+        }
     }
 }
