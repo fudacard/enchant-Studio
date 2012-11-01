@@ -42,5 +42,13 @@ namespace enchantStudio
             this.Close();
             setp.ShowDialog(proj);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
 }

@@ -1,13 +1,13 @@
 ﻿/*
  * enchant Studio
- * v1.1.1
+ * v1.2.0
  * ｋｂ１０うｙ
  * 
- * v1.0.2からの更新点
- * ・フォルダツリーの右クリックメニューを追加した。
+ * v1.1.1からの更新点
+ * ・フォルダツリー関係があまりにひどすぎたので
+ * 　更新
  * 
- * ・それにともなって、画像を右クリした時に、
- * 　チェックツールでチェックするようにした。
+ * ・"..."の追加
  * 
  */
 
@@ -84,10 +84,10 @@ namespace enchantStudio
         Form_About AboutWindow;
         Form_SetProject PrjSettingWindow;
         Form_Replace ReplaceWindow;
-        
+
         Encoding SelectEncoding;
         Font EditorFont;
-        
+
         /// <summary>
         /// 右クリしたノード
         /// </summary>
@@ -135,7 +135,7 @@ namespace enchantStudio
             seri = new Serializer();
 
 
-            config=LoadConfig();
+            config = LoadConfig();
 
 
             EditorFont = new Font(config.FontName, config.FontSize);
@@ -164,7 +164,7 @@ namespace enchantStudio
 
         void Application_ApplicationExit(object sender, EventArgs e)
         {
-            
+
             SaveConfig(config);
         }
 
@@ -382,7 +382,7 @@ namespace enchantStudio
                 ViewFolderTree(nowProject.ProjectPath + "\\" + nowProject.ProjectName, treeView1);
                 this.Text = nowProject.ProjectName + " - enchant Studio";
 
-                ESProjectXML exm = (ESProjectXML)seri.LoadObject(typeof(ESProjectXML),nowfp+"\\"+nowProject.ProjectName+".esprj");
+                ESProjectXML exm = (ESProjectXML)seri.LoadObject(typeof(ESProjectXML), nowfp + "\\" + nowProject.ProjectName + ".esprj");
                 nowProject.Execute = exm.ExecuteHTML;
 
             }
@@ -540,8 +540,8 @@ namespace enchantStudio
         {
             if (Directory.Exists(toolStripTextBox2.Text))
             {
-                ViewFolderTree(viewpath, treeView1);
                 viewpath = toolStripTextBox2.Text;
+                ViewFolderTree(viewpath, treeView1);
 
             }
             else
@@ -570,7 +570,7 @@ namespace enchantStudio
             {
                 TreeNode node_fl = new TreeNode(file.Name, GetFileIconIndex(file.Name), GetFileIconIndex(file.Name));
                 par.Nodes.Add(node_fl);
-                IsDirectory[node_fl.GetHashCode()] = false ;
+                IsDirectory[node_fl.GetHashCode()] = false;
             }
         }
 
@@ -589,7 +589,7 @@ namespace enchantStudio
         {
             if (nowProject.IsCreated)
             {
-                System.Diagnostics.Process.Start(nowfp+"\\"+nowProject.Execute);
+                System.Diagnostics.Process.Start(nowfp + "\\" + nowProject.Execute);
             }
         }
 
@@ -605,7 +605,7 @@ namespace enchantStudio
                 nowProject.ProjectName = exm.ProjectName;
                 nowProject.Execute = exm.ExecuteHTML;
                 this.Text = exm.ProjectName + " - enchant Studio";
-                
+
                 nowProject.IsCreated = true;
             }
 
@@ -622,10 +622,10 @@ namespace enchantStudio
                 case ".js":
                 case ".htm":
                 case ".html":
-                    CreateAzukiTabWithFile(nowfp + "\\" + e.Node.FullPath);
+                    CreateAzukiTabWithFile(viewpath + "\\" + e.Node.FullPath);
                     break;
                 default:
-                    System.Diagnostics.Process.Start(nowfp + "\\" + e.Node.FullPath);
+                    System.Diagnostics.Process.Start(viewpath + "\\" + e.Node.FullPath);
                     break;
             }
         }
@@ -642,7 +642,7 @@ namespace enchantStudio
         {
             if (tabControl1.TabCount < 1) return;
             if (e.KeyData != Keys.Enter) return;
-            AzukiControl nowaz= (AzukiControl)tabControl1.SelectedTab.Controls[0];
+            AzukiControl nowaz = (AzukiControl)tabControl1.SelectedTab.Controls[0];
             SearchResult re = nowaz.Document.FindNext(toolStripTextBox1.Text, next);
             if (re != null)
             {
@@ -768,7 +768,7 @@ namespace enchantStudio
             else
             {
                 //ファイルだった時
-                ShowBestContextMenu(Path.GetExtension(e.Node.FullPath),e);
+                ShowBestContextMenu(Path.GetExtension(e.Node.FullPath), e);
             }
         }
 
