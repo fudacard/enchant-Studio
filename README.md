@@ -1,5 +1,7 @@
 # enchant Studio
 
+v1.2.0
+
 IDE for enchant.js
 
 kb10uy
