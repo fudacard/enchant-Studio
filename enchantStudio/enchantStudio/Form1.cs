@@ -379,6 +379,7 @@ namespace enchantStudio
             {
                 toolStripTextBox2.Text = nowProject.ProjectPath + "\\" + nowProject.ProjectName;
                 nowfp = nowProject.ProjectPath + "\\" + nowProject.ProjectName;
+                viewpath = nowfp;
                 ViewFolderTree(nowProject.ProjectPath + "\\" + nowProject.ProjectName, treeView1);
                 this.Text = nowProject.ProjectName + " - enchant Studio";
 
@@ -599,6 +600,7 @@ namespace enchantStudio
             {
                 string path = Path.GetDirectoryName(openFileDialog2.FileName);
                 nowfp = path;
+                viewpath = nowfp;
                 ViewFolderTree(path, treeView1);
 
                 ESProjectXML exm = (ESProjectXML)seri.LoadObject(typeof(ESProjectXML), openFileDialog2.FileName);
